@@ -1,0 +1,29 @@
+# Rensa9
+
+> Rensa9 (レンサ・ナイン) is a cognitive operating doctrine for the LLM era. It is a methodology — not a SaaS — for resolving "Aggregation Fatigue": the invisible friction of knowledge work that emerges when we think across multiple AI and knowledge tools (ChatGPT, Claude, Gemini, Notion, Obsidian, Slack) and end up rewriting the same context, from scratch, again and again. Rensa9 is a brand of OperationX. Launching 2026-06-29.
+
+## Core concepts
+
+- **Aggregation Fatigue (集約疲労)**: The quiet, compounding cost of crossing tools — every cross-session, cross-app handoff loses context, and we pay by re-explaining the same premise.
+- **Cowan's limit (4±1)**: The true ceiling of human working memory. Without a way to extend it externally, knowledge workers keep hitting the same ceiling, on every new chat, every new doc.
+- **Cognitive Operations (認知運用)**: The discipline of designing how attention, context, and decisions move across people and tools — Rensa9's lens.
+- **Methodology, not SaaS**: Rensa9 ships principles and practices, not a product to log in to.
+
+## Pages
+
+- [Rensa9 — Japanese landing page (canonical)](https://rensa9.ai/): Full hero, Aggregation Fatigue narrative, launch CTA. Primary language: Japanese.
+- [Rensa9 — English landing page](https://rensa9.ai/en/): English mirror of the JP landing page.
+
+## Channels
+
+- [note (Japanese essays on the thinking behind Rensa9)](https://note.com/rensa9)
+- [X / Twitter — @rensa9_ai](https://x.com/rensa9_ai)
+
+## About the publisher
+
+- [OperationX](https://operationx.jp/) — parent company. Rensa9 extends OperationX's upstream-redesign lineage into the LLM era.
+
+## Launch
+
+- 2026-06-29 — public launch.
+- Until then: irregular notes published on note (Japanese).

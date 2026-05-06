@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#fdfcf9" />
+
+<title>Rensa9 ── LLM時代の認知運用論 | 集約疲労を解く</title>
+<meta name="description" content="ChatGPT・Claude・Geminiをまたぐたびに、私たちは同じ前提を最初から書き直している。集約疲労 ── 知識労働の見えない摩擦に、認知運用論で挑むRensa9。OperationXの新規プロダクト。2026年6月29日ローンチ。" />
+<meta name="keywords" content="Rensa9, レンサ9, 集約疲労, Aggregation Fatigue, 認知運用, LLM, AI 文脈管理, AI 知識労働, ChatGPT Claude 統合, Cowan 4±1, OperationX" />
+<meta name="author" content="OperationX" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+<!-- Canonical & i18n -->
+<link rel="canonical" href="https://rensa9.ai/" />
+<link rel="alternate" hreflang="ja" href="https://rensa9.ai/" />
+<link rel="alternate" hreflang="en" href="https://rensa9.ai/en/" />
+<link rel="alternate" hreflang="x-default" href="https://rensa9.ai/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Rensa9" />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:url" content="https://rensa9.ai/" />
+<meta property="og:title" content="Rensa9 ── LLM時代の認知運用論" />
+<meta property="og:description" content="ChatGPTで考えた。Claudeで深めた。Geminiで整理した。──そして、また同じ前提を、最初から書いた。集約疲労に挑むRensa9。" />
+<meta property="og:image" content="https://rensa9.ai/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Rensa9 — Aggregation Fatigue. LLM時代の認知運用論。" />
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@rensa9_ai" />
+<meta name="twitter:creator" content="@rensa9_ai" />
+<meta name="twitter:title" content="Rensa9 ── LLM時代の認知運用論" />
+<meta name="twitter:description" content="集約疲労 ── 知識労働の見えない摩擦。Rensa9 はここから始まる。" />
+<meta name="twitter:image" content="https://rensa9.ai/og.png" />
+
+<!-- AI search hints -->
+<link rel="alternate" type="text/markdown" title="LLM-readable summary" href="https://rensa9.ai/llms.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Shippori+Mincho+B1:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Structured data: Organization + WebSite + WebPage + FAQ + Product -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rensa9.ai/#org",
+      "name": "Rensa9",
+      "alternateName": ["レンサ9", "レンサ・ナイン"],
+      "url": "https://rensa9.ai/",
+      "logo": "https://rensa9.ai/og.png",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "OperationX",
+        "url": "https://operationx.jp/"
+      },
+      "sameAs": [
+        "https://note.com/rensa9",
+        "https://x.com/rensa9_ai"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rensa9.ai/#website",
+      "url": "https://rensa9.ai/",
+      "name": "Rensa9",
+      "description": "LLM時代の認知運用論。集約疲労を解くプロダクト。",
+      "inLanguage": ["ja-JP", "en-US"],
+      "publisher": { "@id": "https://rensa9.ai/#org" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rensa9.ai/#webpage",
+      "url": "https://rensa9.ai/",
+      "name": "Rensa9 ── LLM時代の認知運用論",
+      "description": "集約疲労に挑むRensa9のティーザーページ。2026年6月29日ローンチ。",
+      "inLanguage": "ja-JP",
+      "isPartOf": { "@id": "https://rensa9.ai/#website" },
+      "about": { "@id": "https://rensa9.ai/#org" },
+      "primaryImageOfPage": "https://rensa9.ai/og.png"
+    },
+    {
+      "@type": "Product",
+      "name": "Rensa9",
+      "description": "LLM時代の認知運用論。複数のAIツールにまたがって発生する集約疲労を解くためのメソドロジー。",
+      "brand": { "@id": "https://rensa9.ai/#org" },
+      "category": "Cognitive Operations Methodology",
+      "releaseDate": "2026-06-29",
+      "url": "https://rensa9.ai/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Rensa9とは何ですか?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rensa9 (レンサ・ナイン) は、複数のLLM・ナレッジツールをまたぐ知識労働で発生する『集約疲労』を解くための認知運用論です。OperationXの新規プロダクトとして2026年6月29日にローンチします。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "集約疲労 (Aggregation Fatigue) とは何ですか?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ChatGPT・Claude・Geminiなど複数のAIツールや、Notion・Obsidian・Slackなどのナレッジツールをまたぐ際に、同じ前提や文脈を何度も書き直すことで生じる、知識労働の見えない摩擦のことです。Cowanの認知限界 (4±1) を外部に拡張する手段がない状態で、私たちは同じ議論を最初からやり直すという最も静かなコストを払い続けています。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Rensa9はSaaSですか?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rensa9はSaaSではなく、メソドロジー (方法論) です。LLM時代の認知運用について、設計の原則とプラクティスを提示します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "いつローンチしますか?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年6月29日にローンチ予定です。それまでの検討の過程は、noteで不定期に書いていきます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "OperationXとの関係は?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rensa9はOperationX (オペレーションエックス) のブランドの一つです。OperationXの上流再設計の系譜を、LLM時代の認知運用に展開した新規プロダクトです。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  /* =========================================================
+     Rensa9 — LP teaser
+     Foundations from OperationX (warm mono, hairlines, generous WS)
+     extended with Rensa9 specifics: Crimson Pro / Spectral,
+     paper-warm surface, single-point structural blue accent.
+     ========================================================= */
+
+  :root {
+    /* Palette — Rensa9 brief */
+    --ink:        #1a1a1a;
+    --ink-soft:   #4a4a4a;
+    --ink-mute:   #888888;
+    --paper:      #fdfcf9;
+    --paper-warm: #f8f6f1;
+    --line:       #e8e6e2;
+    --accent:     #0F4392;   /* Lexus structural blue — used ONLY on grid centre + the "9" glyph */
+
+    /* Type roles */
+    --font-logo:  "Crimson Pro", "EB Garamond", Georgia, serif;
+    --font-en:    "Spectral", "EB Garamond", Georgia, serif;
+    --font-jp:    "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --font-ui:    "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+
+    /* Motion */
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+    --dur-1: 160ms;
+    --dur-2: 360ms;
+
+    /* Layout */
+    --max:    1240px;
+    --gutter: clamp(20px, 5vw, 56px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-jp);
+    font-size: 16px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    word-break: keep-all;
+    line-break: strict;
+    overflow-wrap: normal;
+  }
+
+  ::selection { background: var(--paper-warm); color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    backdrop-filter: blur(14px) saturate(1.05);
+    -webkit-backdrop-filter: blur(14px) saturate(1.05);
+    background: rgba(253, 252, 249, 0.72);
+    transition: border-color var(--dur-2) var(--ease), background var(--dur-2) var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  .nav.is-scrolled {
+    border-bottom-color: var(--line);
+    background: rgba(253, 252, 249, 0.88);
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 18px var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .nav-brand .mark { width: 22px; height: 22px; display: block; }
+  .nav-brand .word {
+    font-family: var(--font-logo);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .nav-brand .word .nine {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .nav-cta {
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 9px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    transition: border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease), background var(--dur-1) var(--ease);
+  }
+  .nav-cta:hover {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .nav-cta .arrow {
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform var(--dur-1) var(--ease);
+  }
+  .nav-cta:hover .arrow { transform: translateX(2px); }
+
+  /* Right cluster: lang switch + CTA */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  .lang-switch a {
+    color: var(--ink-mute);
+    text-decoration: none;
+    border: 0;
+    padding: 4px 2px;
+    transition: color var(--dur-1) var(--ease);
+  }
+  .lang-switch a:hover { color: var(--ink); }
+  .lang-switch a.lang-active { color: var(--ink); }
+  .lang-switch span { color: var(--line); user-select: none; }
+
+  /* ---------- Section scaffolding ---------- */
+  section { position: relative; }
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .eyebrow {
+    font-family: var(--font-en);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--ink-mute);
+    letter-spacing: 0.01em;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 0 80px;
+    display: flex;
+    align-items: center;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(48px, 8vw, 120px);
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--ink-mute);
+  }
+
+  .hero-copy {
+    font-family: var(--font-jp);
+    font-weight: 400;
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.85;
+    color: var(--ink);
+    margin: 0 0 56px;
+    max-width: 22em;
+  }
+  .hero-copy .line { display: block; }
+  .hero-copy .punchline {
+    display: block;
+    margin-top: 0.85em;
+    font-weight: 500;
+  }
+
+  .hero-logo {
+    font-family: var(--font-logo);
+    font-weight: 500;
+    font-size: clamp(60px, 8vw, 92px);
+    letter-spacing: -0.015em;
+    line-height: 1;
+    margin: 0 0 24px;
+    color: var(--ink);
+  }
+  .hero-logo .nine {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-jp);
+    font-weight: 400;
+    font-size: clamp(15px, 1.2vw, 17px);
+    color: var(--ink-soft);
+    line-height: 1.8;
+    margin: 0 0 56px;
+  }
+
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    color: var(--paper);
+    background: var(--ink);
+    text-decoration: none;
+    padding: 16px 26px;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease), transform var(--dur-2) var(--ease);
+  }
+  .cta-primary:hover { background: transparent; color: var(--ink); }
+  .cta-primary .arrow { display: inline-block; transition: transform var(--dur-2) var(--ease); }
+  .cta-primary:hover .arrow { transform: translateX(4px); }
+
+  /* Hero symbol — 9-grid, large */
+  .hero-symbol {
+    justify-self: center;
+    width: clamp(220px, 24vw, 280px);
+    aspect-ratio: 1;
+    position: relative;
+  }
+  .hero-symbol svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+
+  /* ---------- 9-grid choreography ----------
+     Entry (once):  外8マスがストロークで描画 → 中央セルがふわっと立ち上がる
+                   (= 散らばった文脈が集約される)
+     Loop (forever): Tension / Breath ── 8マスが中央へごく僅かに引かれて戻る、
+                   中央が同期して脈打つ (= 認知の呼吸)
+     合計尺: 入場 ~1.6s → そのまま breath ループに引き継ぐ。
+  */
+
+  /* Outer cells */
+  .hero-symbol .cell-outer {
+    transform-box: fill-box;
+    transform-origin: center center;
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    opacity: 0;
+    animation:
+      heroEntryOuter 1300ms var(--ease) both,
+      heroBreath 5s var(--ease) 1700ms infinite;
+  }
+  /* Centre */
+  .hero-symbol .centre {
+    transform-box: fill-box;
+    transform-origin: center center;
+    opacity: 0;
+    transform: scale(0.5);
+    animation:
+      heroEntryCentre 900ms var(--ease) 1100ms both,
+      heroPulse 5s var(--ease) 2000ms infinite;
+  }
+
+  /* Per-cell entry stagger — spiral inward */
+  .hero-symbol .c-tl { animation-delay:   0ms, 1700ms; --tug: translate(4px,  4px); }
+  .hero-symbol .c-tc { animation-delay:  90ms, 1700ms; --tug: translate(0,    4px); }
+  .hero-symbol .c-tr { animation-delay: 180ms, 1700ms; --tug: translate(-4px, 4px); }
+  .hero-symbol .c-mr { animation-delay: 270ms, 1700ms; --tug: translate(-4px, 0);   }
+  .hero-symbol .c-br { animation-delay: 360ms, 1700ms; --tug: translate(-4px,-4px); }
+  .hero-symbol .c-bc { animation-delay: 450ms, 1700ms; --tug: translate(0,   -4px); }
+  .hero-symbol .c-bl { animation-delay: 540ms, 1700ms; --tug: translate(4px, -4px); }
+  .hero-symbol .c-ml { animation-delay: 630ms, 1700ms; --tug: translate(4px,  0);   }
+
+  @keyframes heroEntryOuter {
+    0%   { stroke-dashoffset: 240; opacity: 0; }
+    20%  { opacity: 1; }
+    100% { stroke-dashoffset: 0;   opacity: 1; }
+  }
+  @keyframes heroEntryCentre {
+    0%   { opacity: 0; transform: scale(0.5); }
+    60%  { opacity: 1; transform: scale(1.12); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes heroBreath {
+    0%, 100% { transform: translate(0,0); opacity: 0.85; }
+    50%      { transform: var(--tug, translate(0,0)); opacity: 1; }
+  }
+  @keyframes heroPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-symbol .cell-outer,
+    .hero-symbol .centre {
+      animation: none;
+      stroke-dashoffset: 0;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ---------- Aggregation fatigue ---------- */
+  .fatigue {
+    background: var(--paper-warm);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(80px, 12vw, 160px) 0;
+  }
+  .fatigue-head {
+    max-width: 720px;
+    margin: 0 auto 80px;
+    text-align: center;
+  }
+  .fatigue-head .eyebrow {
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .fatigue-head .en-title {
+    font-family: var(--font-en);
+    font-weight: 500;
+    font-style: normal;
+    font-size: clamp(36px, 4.6vw, 56px);
+    line-height: 1.15;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+  .fatigue-head .jp-sub {
+    font-family: var(--font-jp);
+    font-weight: 400;
+    font-size: clamp(15px, 1.2vw, 17px);
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .fatigue-body {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .fatigue-body p {
+    font-family: var(--font-jp);
+    font-weight: 400;
+    font-size: clamp(17px, 1.35vw, 19px);
+    line-height: 2.0;
+    color: var(--ink);
+    margin: 0 0 1.8em;
+  }
+  .fatigue-body p:last-of-type { margin-bottom: 0; }
+
+  .fatigue-rule {
+    width: 56px;
+    height: 1px;
+    background: var(--ink);
+    border: 0;
+    margin: 64px auto 32px;
+    opacity: 0.6;
+  }
+  .fatigue-close {
+    text-align: center;
+    font-family: var(--font-jp);
+    font-weight: 500;
+    font-size: clamp(18px, 1.5vw, 22px);
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+  .fatigue-close .nine-inline {
+    font-family: var(--font-logo);
+    font-style: italic;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .fatigue-close .rensa-inline {
+    font-family: var(--font-logo);
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* Stats row */
+  .stats {
+    margin-top: clamp(80px, 10vw, 120px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat {
+    padding: 40px 28px;
+    text-align: center;
+    border-right: 1px solid var(--line);
+  }
+  .stat:last-child { border-right: 0; }
+  .stat-num {
+    font-family: var(--font-en);
+    font-weight: 500;
+    font-size: clamp(40px, 4vw, 48px);
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label {
+    font-family: var(--font-ui);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-mute);
+    letter-spacing: 0.005em;
+  }
+  .stat-label .src {
+    display: block;
+    margin-top: 4px;
+    font-style: italic;
+    font-family: var(--font-en);
+    font-size: 12px;
+    color: var(--ink-mute);
+  }
+
+  /* ---------- Launch CTA ---------- */
+  .launch {
+    padding: clamp(100px, 14vw, 180px) 0;
+    text-align: center;
+  }
+  .launch-date {
+    font-family: var(--font-en);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--ink-mute);
+    letter-spacing: 0.1em;
+    margin: 0 0 32px;
+  }
+  .launch-h {
+    font-family: var(--font-jp);
+    font-weight: 500;
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 24px;
+    letter-spacing: 0.005em;
+    max-width: 18em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .launch-h .br { display: block; }
+  .launch-en {
+    font-family: var(--font-en);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 1.8vw, 24px);
+    color: var(--ink-mute);
+    margin: 0 0 64px;
+  }
+
+  /* Follow buttons — note (primary) + X (secondary) */
+  .follow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .follow .btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    padding: 16px 24px;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease), transform var(--dur-2) var(--ease);
+  }
+  .follow .btn-primary { background: var(--ink); color: var(--paper); }
+  .follow .btn-primary:hover { background: transparent; color: var(--ink); }
+  .follow .btn-secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+  .follow .btn-secondary:hover { border-color: var(--ink); }
+  .follow .btn .arrow { display: inline-block; transition: transform var(--dur-2) var(--ease); }
+  .follow .btn:hover .arrow { transform: translateX(4px); }
+  .launch-note {
+    margin: 28px 0 0;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--ink-mute);
+    line-height: 1.6;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    border-top: 1px solid var(--line);
+    padding: 56px 0;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .footer-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .footer-left .mark { width: 26px; height: 26px; flex: 0 0 26px; margin-top: 2px; }
+  .footer-left .col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .footer-left .word {
+    font-family: var(--font-logo);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .footer-left .word .nine {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .footer-left .meta {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .footer-left .meta a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+  }
+  .footer-left .meta a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .footer-right {
+    text-align: right;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.01em;
+    line-height: 1.7;
+  }
+
+  /* ---------- Responsive ---------- */
+  /* Tablet */
+  @media (max-width: 860px) {
+    .hero { padding: 96px 0 64px; min-height: auto; }
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .hero-symbol {
+      grid-row: 1;
+      width: 160px;
+      justify-self: start;
+    }
+    .hero-eyebrow { margin-bottom: 28px; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: 0; border-bottom: 1px solid var(--line); padding: 32px 24px; }
+    .stat:last-child { border-bottom: 0; }
+    .stat-num { font-size: 38px; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-right { text-align: left; }
+  }
+
+  /* Mobile */
+  @media (max-width: 520px) {
+    :root { --gutter: 22px; }
+
+    .nav-inner { padding: 14px var(--gutter); }
+    .nav-brand .word { font-size: 19px; }
+    .nav-brand .mark { width: 18px; height: 18px; }
+    .nav-cta { padding: 8px 12px; font-size: 12px; }
+
+    .hero { padding: 84px 0 56px; }
+    .hero-grid { gap: 32px; }
+    .hero-symbol { width: 132px; }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      margin-bottom: 22px;
+      gap: 10px;
+    }
+    .hero-eyebrow::before { width: 20px; }
+
+    .hero-copy {
+      font-size: 19px;
+      line-height: 1.85;
+      margin: 0 0 36px;
+    }
+
+    .hero-logo { font-size: 52px; margin-bottom: 16px; }
+    .hero-tagline { font-size: 14px; margin: 0 0 0; }
+
+    .fatigue { padding: 72px 0 80px; }
+    .fatigue-head { margin-bottom: 56px; }
+    .fatigue-head .en-title { font-size: 32px; }
+    .fatigue-head .jp-sub { font-size: 14px; }
+    .fatigue-body p { font-size: 16px; line-height: 1.95; }
+    .fatigue-body p br { display: none; } /* tighter on mobile */
+    .fatigue-rule { margin: 48px auto 24px; }
+    .fatigue-close { font-size: 17px; }
+    .stats { margin-top: 64px; }
+
+    .launch { padding: 80px 0 96px; }
+    .launch-h { font-size: 24px; line-height: 1.7; }
+    .launch-en { font-size: 17px; margin-bottom: 40px; }
+    .launch-date { font-size: 14px; margin-bottom: 24px; }
+
+    .follow .btn {
+      font-size: 14px;
+      padding: 16px 20px;
+      min-height: 48px; /* tap target */
+    }
+
+    .footer { padding: 40px 0; }
+    .footer-left .word { font-size: 19px; }
+
+    /* Lang switch wraps tighter */
+    .lang-switch { font-size: 12px; }
+  }
+
+  /* Very small phones */
+  @media (max-width: 360px) {
+    .hero-copy { font-size: 17px; }
+    .hero-logo { font-size: 44px; }
+    .fatigue-head .en-title { font-size: 28px; }
+    .launch-h { font-size: 21px; }
+  }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  }
+  .reveal.is-in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- ============================== NAV ============================== -->
+<nav class="nav" id="nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top" aria-label="Rensa9 — home">
+      <svg class="mark" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0"  y="0"  width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="11" y="0"  width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="22" y="0"  width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="0"  y="11" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="11" y="11" width="8" height="8" fill="#0F4392"></rect>
+        <rect x="22" y="11" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="0"  y="22" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="11" y="22" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="22" y="22" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+      </svg>
+      <span class="word">Rensa<span class="nine">9</span></span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language switch">
+        <a href="/" hreflang="ja" class="lang-active" aria-current="page">JP</a>
+        <span aria-hidden="true">·</span>
+        <a href="/en/" hreflang="en">EN</a>
+      </div>
+      <a href="https://note.com/rensa9" target="_blank" rel="noopener" class="nav-cta">Follow on note<span class="arrow">→</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <div class="hero-eyebrow eyebrow reveal">A methodology, not a SaaS.</div>
+
+      <p class="hero-copy reveal">
+        <span class="line">ChatGPTで考えた。</span>
+        <span class="line">Claudeで深めた。</span>
+        <span class="line">Geminiで整理した。</span>
+        <span class="punchline">──そして、また同じ前提を、最初から書いた。</span>
+      </p>
+
+      <h1 class="hero-logo reveal">Rensa<span class="nine">9</span></h1>
+      <p class="hero-tagline reveal">レンサ・ナイン ── LLM時代の認知運用論</p>
+    </div>
+
+    <div class="hero-symbol reveal" aria-hidden="true">
+      <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+        <rect class="cell-outer c-tl" x="0"   y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+        <rect class="cell-outer c-tc" x="90"  y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+        <rect class="cell-outer c-tr" x="180" y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+        <rect class="cell-outer c-ml" x="0"   y="90"  width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+        <rect class="centre"          x="90"  y="90"  width="60" height="60" fill="#0F4392"></rect>
+        <rect class="cell-outer c-mr" x="180" y="90"  width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+        <rect class="cell-outer c-bl" x="0"   y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+        <rect class="cell-outer c-bc" x="90"  y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+        <rect class="cell-outer c-br" x="180" y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== AGGREGATION FATIGUE ============================== -->
+<section class="fatigue">
+  <div class="container">
+    <header class="fatigue-head">
+      <span class="eyebrow reveal">the aggregation fatigue</span>
+      <h2 class="en-title reveal"><span lang="en">Aggregation Fatigue</span></h2>
+      <p class="jp-sub reveal">集約疲労 ── 知識労働の見えない摩擦</p>
+    </header>
+
+    <div class="fatigue-body">
+      <p class="reveal">私たちはAIをまたいで思考している。<br />ある問いはClaudeで深まり、別の論点はChatGPTで整理され、<br />資料はNotionで、メモはObsidianで、<br />断片はSlackやLINEに散らばる。</p>
+
+      <p class="reveal">しかし、ツールをまたぐたび、文脈は失われる。<br />同じ前提を、別のチャットで、別のページで、<br />私たちは何度書き直してきただろう。</p>
+
+      <p class="reveal">Cowanの認知限界 (4±1) を、<br />外部に拡張する手段がないまま、<br />私たちは「同じ議論をやり直す」という、<br />最も静かなコストを払い続けている。</p>
+
+      <hr class="fatigue-rule reveal" />
+      <p class="fatigue-close reveal"><span class="rensa-inline">Rensa<span class="nine-inline">9</span></span> は、ここから始まる。</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat reveal">
+        <div class="stat-num">4±1</div>
+        <div class="stat-label">人間の作業記憶の真の上限<span class="src">— Cowan, 2001</span></div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">N+1</div>
+        <div class="stat-label">使用中のAI・ナレッジツール数<span class="src">— そしてセッション数</span></div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">同じ議論を最初から<span class="src">— 説明し直した回数</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== LAUNCH CTA ============================== -->
+<section class="launch" id="launch">
+  <div class="container">
+    <p class="launch-date reveal">— 2026.06.29 —</p>
+    <h2 class="launch-h reveal">
+      <span class="br">同じ議論を、もう一度</span>
+      <span class="br">最初から書きたくない人へ。</span>
+    </h2>
+    <p class="launch-en reveal">Notify me at launch.</p>
+
+    <div class="follow reveal">
+      <a class="btn btn-primary" href="https://note.com/rensa9" target="_blank" rel="noopener">noteでフォローする<span class="arrow">→</span></a>
+      <a class="btn btn-secondary" href="https://x.com/rensa9_ai" target="_blank" rel="noopener">@rensa9_ai をフォロー<span class="arrow">→</span></a>
+    </div>
+
+    <p class="launch-note reveal">noteで、検討の過程を不定期に書きます。</p>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-left">
+      <svg class="mark" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0"  y="0"  width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="11" y="0"  width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="22" y="0"  width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="0"  y="11" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="11" y="11" width="8" height="8" fill="#0F4392"></rect>
+        <rect x="22" y="11" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="0"  y="22" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="11" y="22" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="22" y="22" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+      </svg>
+      <div class="col">
+        <span class="word">Rensa<span class="nine">9</span></span>
+        <p class="meta">
+          Rensa9 is a brand of <a href="https://operationx.jp" target="_blank" rel="noopener">OperationX</a>.<br />
+          LLM時代の認知運用論。
+        </p>
+      </div>
+    </div>
+    <div class="footer-right">
+      © 2026 OperationX&nbsp;&nbsp;/&nbsp;&nbsp;rensa9.ai
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav: hairline appears on scroll
+  (function () {
+    var nav = document.getElementById('nav');
+    var onScroll = function () {
+      if (window.scrollY > 8) nav.classList.add('is-scrolled');
+      else nav.classList.remove('is-scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // Scroll reveal — gentle fade-up
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el, i) {
+      // Stagger inside same parent slightly
+      el.style.transitionDelay = ((i % 6) * 40) + 'ms';
+      io.observe(el);
+    });
+  })();
+
+
+</script>
+
+</body>
+</html>

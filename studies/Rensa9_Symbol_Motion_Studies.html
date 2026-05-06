@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rensa9 ── Symbol Motion Studies</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,500;0,600;1,600&family=Shippori+Mincho+B1:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-soft:   #4a4a4a;
+    --ink-mute:   #888888;
+    --paper:      #fdfcf9;
+    --paper-warm: #f8f6f1;
+    --line:       #e8e6e2;
+    --accent:     #0F4392;
+
+    --font-logo:  "Crimson Pro", Georgia, serif;
+    --font-en:    "Spectral", Georgia, serif;
+    --font-jp:    "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --font-ui:    "Inter", -apple-system, sans-serif;
+
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--font-jp);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { padding: 80px clamp(20px, 5vw, 56px) 120px; max-width: 1240px; margin: 0 auto; }
+
+  .header { margin-bottom: 72px; }
+  .header .eyebrow {
+    font-family: var(--font-en); font-style: italic; font-size: 14px;
+    color: var(--ink-mute); letter-spacing: 0.04em; margin-bottom: 14px;
+  }
+  .header h1 {
+    font-family: var(--font-logo); font-weight: 500; font-size: 44px;
+    letter-spacing: -0.015em; line-height: 1.15; margin: 0 0 14px;
+  }
+  .header h1 .nine { font-style: italic; font-weight: 600; color: var(--accent); }
+  .header p {
+    font-family: var(--font-jp); font-size: 16px; line-height: 1.85;
+    color: var(--ink-soft); max-width: 44em; margin: 0;
+  }
+  .header p .em { color: var(--ink); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 36px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 200ms var(--ease);
+  }
+  .card:hover { border-color: var(--ink); }
+  .card .label {
+    font-family: var(--font-en); font-style: italic;
+    font-size: 13px; color: var(--ink-mute); letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .card .name {
+    font-family: var(--font-en); font-weight: 500; font-size: 22px;
+    color: var(--ink); margin-bottom: 4px; letter-spacing: -0.005em;
+  }
+  .card .jp {
+    font-family: var(--font-jp); font-weight: 400; font-size: 13px;
+    color: var(--ink-soft); margin-bottom: 28px;
+  }
+  .card .stage {
+    align-self: center;
+    width: 220px; height: 220px;
+    margin: 0 auto 28px;
+    display: grid; place-items: center;
+  }
+  .card .stage svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .card .desc {
+    font-family: var(--font-jp); font-size: 13px; line-height: 1.85;
+    color: var(--ink-soft); margin: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+  }
+  .card .desc .em { color: var(--ink); font-weight: 500; }
+
+  .pick-back {
+    display: inline-block;
+    margin-top: 64px;
+    font-family: var(--font-ui); font-size: 13px;
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .pick-back:hover { border-bottom-color: var(--ink); }
+
+  /* ============================================================
+     SHARED: cell base styles. Each pattern overrides the keyframes.
+     viewBox = 240. Cells = 60×60, gaps of 30 between.
+     ============================================================ */
+  .cell {
+    transform-box: fill-box;
+    transform-origin: center center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage svg .cell, .stage svg .centre {
+      animation: none !important;
+      stroke-dashoffset: 0 !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  /* ===========================================================
+     A — CONVERGE  (現状ループの精緻版)
+     "散らばっていた断片が、中央に集約される"
+     8マスがストロークで現れ、中央へ吸い寄せられて消え、
+     代わりに中央セルが立ち上がる。
+     =========================================================== */
+  .a .cell-outer {
+    stroke-dasharray: 240; stroke-dashoffset: 240;
+    opacity: 0;
+    animation: a-outer 6.5s var(--ease) infinite;
+  }
+  .a .centre {
+    opacity: 0; transform: scale(0.4);
+    animation: a-centre 6.5s var(--ease) infinite;
+  }
+  .a .c-tl { animation-delay: 0ms;   --tug: translate(8px, 8px); }
+  .a .c-tc { animation-delay: 80ms;  --tug: translate(0,   8px); }
+  .a .c-tr { animation-delay: 160ms; --tug: translate(-8px,8px); }
+  .a .c-mr { animation-delay: 240ms; --tug: translate(-8px,0);   }
+  .a .c-br { animation-delay: 320ms; --tug: translate(-8px,-8px);}
+  .a .c-bc { animation-delay: 400ms; --tug: translate(0,  -8px); }
+  .a .c-bl { animation-delay: 480ms; --tug: translate(8px, -8px);}
+  .a .c-ml { animation-delay: 560ms; --tug: translate(8px,  0);  }
+  @keyframes a-outer {
+    0%   { stroke-dashoffset: 240; opacity: 0; transform: translate(0,0); }
+    4%   { opacity: 1; }
+    16%  { stroke-dashoffset: 0; opacity: 1; transform: translate(0,0); }
+    50%  { stroke-dashoffset: 0; opacity: 1; transform: translate(0,0); }
+    62%  { opacity: 0.5; transform: var(--tug); }
+    96%  { opacity: 0; transform: var(--tug); }
+    100% { stroke-dashoffset: 240; opacity: 0; transform: translate(0,0); }
+  }
+  @keyframes a-centre {
+    0%, 50% { opacity: 0; transform: scale(0.4); }
+    60%     { opacity: 1; transform: scale(1.12); }
+    68%     { opacity: 1; transform: scale(1); }
+    88%     { opacity: 1; transform: scale(1); }
+    96%     { opacity: 0; transform: scale(0.85); }
+    100%    { opacity: 0; transform: scale(0.4); }
+  }
+
+  /* ===========================================================
+     B — ORBIT (BREATH)
+     "認知の呼吸。8つの周辺ツールが、中央に対して呼吸する"
+     8マスが中央方向へごく僅かに引き寄せられ、また戻る。
+     中央セルは終始残り、ぐっと一拍だけ脈打つ。常に揃っている、
+     けれど"張力"が見える ── 静謐路線に最も合うパターン。
+     =========================================================== */
+  .b .cell-outer {
+    fill: none; stroke: #1a1a1a; stroke-width: 1.2;
+    animation: b-breath 5s var(--ease) infinite;
+  }
+  .b .centre {
+    animation: b-centre 5s var(--ease) infinite;
+    transform-origin: center center;
+  }
+  .b .c-tl { --tug: translate(4px,  4px); }
+  .b .c-tc { --tug: translate(0,    4px); }
+  .b .c-tr { --tug: translate(-4px, 4px); }
+  .b .c-mr { --tug: translate(-4px, 0);   }
+  .b .c-br { --tug: translate(-4px,-4px); }
+  .b .c-bc { --tug: translate(0,   -4px); }
+  .b .c-bl { --tug: translate(4px, -4px); }
+  .b .c-ml { --tug: translate(4px,  0);   }
+  @keyframes b-breath {
+    0%, 100% { transform: translate(0,0); opacity: 0.85; }
+    50%      { transform: var(--tug);    opacity: 1; }
+  }
+  @keyframes b-centre {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+  }
+
+  /* ===========================================================
+     C — RELAY (連鎖 / chain)
+     "Rensa = 連鎖。ひとつの問いが次の文脈に渡される"
+     中央から始まり、隣接する周辺セルへ順に "光" が伝播。
+     各セルが一瞬だけ強調されるリレー。Rensa という語の直訳。
+     =========================================================== */
+  .c .cell-outer {
+    fill: none; stroke: #1a1a1a; stroke-width: 1.2; opacity: 0.8;
+  }
+  .c .cell-outer .lit {
+    fill: #1a1a1a; opacity: 0; animation: c-lit 8s var(--ease) infinite;
+  }
+  .c .centre {
+    animation: c-centre 8s var(--ease) infinite;
+  }
+  /* Order: TC → TR → MR → BR → BC → BL → ML → TL → (back) */
+  .c .c-tc .lit { animation-delay: 0.1s; }
+  .c .c-tr .lit { animation-delay: 0.5s; }
+  .c .c-mr .lit { animation-delay: 0.9s; }
+  .c .c-br .lit { animation-delay: 1.3s; }
+  .c .c-bc .lit { animation-delay: 1.7s; }
+  .c .c-bl .lit { animation-delay: 2.1s; }
+  .c .c-ml .lit { animation-delay: 2.5s; }
+  .c .c-tl .lit { animation-delay: 2.9s; }
+  @keyframes c-lit {
+    0%   { opacity: 0; }
+    3%   { opacity: 0.85; }
+    8%   { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  @keyframes c-centre {
+    0%, 100% { transform: scale(1); fill: #0F4392; }
+    50%      { transform: scale(1.04); fill: #0F4392; }
+  }
+
+  /* ===========================================================
+     D — RECALL (記憶の想起)
+     "断片が一つずつ思い出される。最後に全体が見える"
+     ランダムな順序で外マスが薄く点滅して "気付かれる" → 全部が
+     同時に揃って一拍 → 中央が確定する → 全消去。
+     Cowanの 4±1 と "想起" のメタファー。
+     =========================================================== */
+  .d .cell-outer {
+    fill: none; stroke: #1a1a1a; stroke-width: 1.2;
+    opacity: 0;
+    animation: d-recall 7s var(--ease) infinite;
+  }
+  .d .centre {
+    opacity: 0; transform: scale(0.7);
+    animation: d-resolve 7s var(--ease) infinite;
+  }
+  /* Random-feeling order */
+  .d .c-bc { animation-delay: 0.0s; }
+  .d .c-tl { animation-delay: 0.4s; }
+  .d .c-mr { animation-delay: 0.8s; }
+  .d .c-bl { animation-delay: 1.2s; }
+  .d .c-tr { animation-delay: 1.6s; }
+  .d .c-ml { animation-delay: 2.0s; }
+  .d .c-tc { animation-delay: 2.4s; }
+  .d .c-br { animation-delay: 2.8s; }
+  @keyframes d-recall {
+    0%    { opacity: 0; }
+    4%    { opacity: 1; }
+    8%    { opacity: 0.18; }
+    /* hold dim until "full picture" arrives */
+    50%   { opacity: 0.18; }
+    58%   { opacity: 1; }       /* all on together */
+    78%   { opacity: 1; }
+    92%   { opacity: 0; }
+    100%  { opacity: 0; }
+  }
+  @keyframes d-resolve {
+    0%, 50% { opacity: 0; transform: scale(0.7); }
+    58%     { opacity: 0; transform: scale(0.7); }
+    62%     { opacity: 1; transform: scale(1.1); }
+    68%     { opacity: 1; transform: scale(1); }
+    78%     { opacity: 1; transform: scale(1); }
+    92%     { opacity: 0; transform: scale(0.85); }
+    100%    { opacity: 0; transform: scale(0.7); }
+  }
+
+  /* ===========================================================
+     E — SETTLE (再構成 / 再起動)
+     "前提を書き直す行為そのもの。グリッド全体が一度崩れて、また整列する"
+     全セルが微小にランダムな方向へ散る → 整列して着地 → 中央が灯る。
+     "プロセスを組み直す" を可視化。OperationXの上流再設計と接続。
+     =========================================================== */
+  .e .cell-outer {
+    fill: none; stroke: #1a1a1a; stroke-width: 1.2;
+    animation: e-settle 6s var(--ease) infinite;
+  }
+  .e .centre {
+    animation: e-centre 6s var(--ease) infinite;
+  }
+  .e .c-tl { --jit: translate(-6px, -8px) rotate(-2deg); }
+  .e .c-tc { --jit: translate(4px,  -10px) rotate(1.5deg); }
+  .e .c-tr { --jit: translate(8px,  -4px) rotate(-1deg); }
+  .e .c-mr { --jit: translate(10px,  3px) rotate(2deg); }
+  .e .c-br { --jit: translate(6px,  9px) rotate(-1.5deg); }
+  .e .c-bc { --jit: translate(-3px, 8px) rotate(1deg); }
+  .e .c-bl { --jit: translate(-9px, 5px) rotate(-2deg); }
+  .e .c-ml { --jit: translate(-8px, -3px) rotate(1.5deg); }
+  @keyframes e-settle {
+    0%, 100% { transform: var(--jit); opacity: 0.7; }
+    40%, 70% { transform: translate(0,0) rotate(0); opacity: 1; }
+  }
+  @keyframes e-centre {
+    0%, 100% { opacity: 0.3; transform: scale(0.85); }
+    40%, 70% { opacity: 1; transform: scale(1); }
+  }
+
+  @media (max-width: 720px) {
+    .header h1 { font-size: 32px; }
+    .grid { gap: 20px; }
+    .card { padding: 28px 24px 24px; }
+    .card .stage { width: 180px; height: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="header">
+    <div class="eyebrow">Symbol motion studies — Rensa9</div>
+    <h1>9マスシンボル<br />モーション比較</h1>
+    <p>同じシンボル、同じパレット、異なる<span class="em">意味の動き</span>。
+       それぞれがプロダクトの異なる側面を語ります。
+       気に入ったものを教えてもらえれば、ヒーローに採用します。</p>
+  </header>
+
+  <div class="grid">
+
+    <!-- ===== A: CONVERGE ===== -->
+    <article class="card a">
+      <div class="label">A · Converge</div>
+      <div class="name">Aggregation</div>
+      <div class="jp">集約 ── 散らばった文脈が、中央へ</div>
+      <div class="stage" aria-hidden="true">
+        <svg viewBox="0 0 240 240">
+          <rect class="cell cell-outer c-tl" x="0"   y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+          <rect class="cell cell-outer c-tc" x="90"  y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+          <rect class="cell cell-outer c-tr" x="180" y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+          <rect class="cell cell-outer c-ml" x="0"   y="90"  width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+          <rect class="cell centre"          x="90"  y="90"  width="60" height="60" fill="#0F4392"></rect>
+          <rect class="cell cell-outer c-mr" x="180" y="90"  width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+          <rect class="cell cell-outer c-bl" x="0"   y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+          <rect class="cell cell-outer c-bc" x="90"  y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+          <rect class="cell cell-outer c-br" x="180" y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect>
+        </svg>
+      </div>
+      <p class="desc">8つのツールにまたがる文脈を、ひとつの認知運用に<span class="em">集約する</span>。
+        現在のヒーローと同じ振付けを精緻化したもの。最も "集約疲労" に直球。</p>
+    </article>
+
+    <!-- ===== B: BREATH ===== -->
+    <article class="card b">
+      <div class="label">B · Breath</div>
+      <div class="name">Tension</div>
+      <div class="jp">張力 ── 認知の呼吸</div>
+      <div class="stage" aria-hidden="true">
+        <svg viewBox="0 0 240 240">
+          <rect class="cell cell-outer c-tl" x="0"   y="0"   width="60" height="60"></rect>
+          <rect class="cell cell-outer c-tc" x="90"  y="0"   width="60" height="60"></rect>
+          <rect class="cell cell-outer c-tr" x="180" y="0"   width="60" height="60"></rect>
+          <rect class="cell cell-outer c-ml" x="0"   y="90"  width="60" height="60"></rect>
+          <rect class="cell centre"          x="90"  y="90"  width="60" height="60" fill="#0F4392"></rect>
+          <rect class="cell cell-outer c-mr" x="180" y="90"  width="60" height="60"></rect>
+          <rect class="cell cell-outer c-bl" x="0"   y="180" width="60" height="60"></rect>
+          <rect class="cell cell-outer c-bc" x="90"  y="180" width="60" height="60"></rect>
+          <rect class="cell cell-outer c-br" x="180" y="180" width="60" height="60"></rect>
+        </svg>
+      </div>
+      <p class="desc">完成形は壊さない。8マスは中央へごく僅かに引かれて、また戻る。
+        <span class="em">静謐路線</span>に最も合致。Anthropic的な "声を張らない" モーション。</p>
+    </article>
+
+    <!-- ===== C: RELAY ===== -->
+    <article class="card c">
+      <div class="label">C · Relay</div>
+      <div class="name">Chain</div>
+      <div class="jp">連鎖 ── Rensa の語源そのもの</div>
+      <div class="stage" aria-hidden="true">
+        <svg viewBox="0 0 240 240">
+          <g class="cell-outer c-tl"><rect x="0"   y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect><rect class="lit" x="0"   y="0"   width="60" height="60"></rect></g>
+          <g class="cell-outer c-tc"><rect x="90"  y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect><rect class="lit" x="90"  y="0"   width="60" height="60"></rect></g>
+          <g class="cell-outer c-tr"><rect x="180" y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect><rect class="lit" x="180" y="0"   width="60" height="60"></rect></g>
+          <g class="cell-outer c-ml"><rect x="0"   y="90"  width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect><rect class="lit" x="0"   y="90"  width="60" height="60"></rect></g>
+          <rect class="cell centre"          x="90"  y="90"  width="60" height="60" fill="#0F4392"></rect>
+          <g class="cell-outer c-mr"><rect x="180" y="90"  width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect><rect class="lit" x="180" y="90"  width="60" height="60"></rect></g>
+          <g class="cell-outer c-bl"><rect x="0"   y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect><rect class="lit" x="0"   y="180" width="60" height="60"></rect></g>
+          <g class="cell-outer c-bc"><rect x="90"  y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect><rect class="lit" x="90"  y="180" width="60" height="60"></rect></g>
+          <g class="cell-outer c-br"><rect x="180" y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.2"></rect><rect class="lit" x="180" y="180" width="60" height="60"></rect></g>
+        </svg>
+      </div>
+      <p class="desc"><span class="em">Rensa</span> の直訳。中央を起点に、文脈が一マスずつ次へ渡されていく。
+        プロダクトが "知識の連鎖" を扱うものだと最初の3秒で伝わる。</p>
+    </article>
+
+    <!-- ===== D: RECALL ===== -->
+    <article class="card d">
+      <div class="label">D · Recall</div>
+      <div class="name">Working memory</div>
+      <div class="jp">想起 ── 4±1 の認知限界</div>
+      <div class="stage" aria-hidden="true">
+        <svg viewBox="0 0 240 240">
+          <rect class="cell cell-outer c-tl" x="0"   y="0"   width="60" height="60"></rect>
+          <rect class="cell cell-outer c-tc" x="90"  y="0"   width="60" height="60"></rect>
+          <rect class="cell cell-outer c-tr" x="180" y="0"   width="60" height="60"></rect>
+          <rect class="cell cell-outer c-ml" x="0"   y="90"  width="60" height="60"></rect>
+          <rect class="cell centre"          x="90"  y="90"  width="60" height="60" fill="#0F4392"></rect>
+          <rect class="cell cell-outer c-mr" x="180" y="90"  width="60" height="60"></rect>
+          <rect class="cell cell-outer c-bl" x="0"   y="180" width="60" height="60"></rect>
+          <rect class="cell cell-outer c-bc" x="90"  y="180" width="60" height="60"></rect>
+          <rect class="cell cell-outer c-br" x="180" y="180" width="60" height="60"></rect>
+        </svg>
+      </div>
+      <p class="desc">断片が一つずつランダムに <span class="em">思い出される</span>。
+        最後に全体像が同時に揃って、中央が確定する。Cowan の認知限界 (4±1) と "想起" のメタファーを動きで。</p>
+    </article>
+
+    <!-- ===== E: SETTLE ===== -->
+    <article class="card e">
+      <div class="label">E · Settle</div>
+      <div class="name">Re-design</div>
+      <div class="jp">再構成 ── プロセスを組み直す</div>
+      <div class="stage" aria-hidden="true">
+        <svg viewBox="0 0 240 240">
+          <rect class="cell cell-outer c-tl" x="0"   y="0"   width="60" height="60"></rect>
+          <rect class="cell cell-outer c-tc" x="90"  y="0"   width="60" height="60"></rect>
+          <rect class="cell cell-outer c-tr" x="180" y="0"   width="60" height="60"></rect>
+          <rect class="cell cell-outer c-ml" x="0"   y="90"  width="60" height="60"></rect>
+          <rect class="cell centre"          x="90"  y="90"  width="60" height="60" fill="#0F4392"></rect>
+          <rect class="cell cell-outer c-mr" x="180" y="90"  width="60" height="60"></rect>
+          <rect class="cell cell-outer c-bl" x="0"   y="180" width="60" height="60"></rect>
+          <rect class="cell cell-outer c-bc" x="90"  y="180" width="60" height="60"></rect>
+          <rect class="cell cell-outer c-br" x="180" y="180" width="60" height="60"></rect>
+        </svg>
+      </div>
+      <p class="desc">グリッドが一度ずれて、また<span class="em">整列に戻る</span>。
+        "前提を書き直す" 行為そのものの可視化。OperationX の上流再設計の系譜と接続。</p>
+    </article>
+
+  </div>
+
+  <a class="pick-back" href="Rensa9 LP.html">← LP本体に戻る</a>
+
+</div>
+
+</body>
+</html>

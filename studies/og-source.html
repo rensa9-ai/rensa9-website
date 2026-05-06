@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>Rensa9 — OGP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Shippori+Mincho+B1:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-soft:   #4a4a4a;
+    --ink-mute:   #888888;
+    --paper:      #fdfcf9;
+    --paper-warm: #f8f6f1;
+    --line:       #e8e6e2;
+    --accent:     #0F4392;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #2a2a2a;
+    font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", serif;
+  }
+  .stage {
+    width: 1200px;
+    height: 630px;
+    background: var(--paper);
+    color: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* hairline frame */
+  .frame {
+    position: absolute;
+    inset: 32px;
+    border: 1px solid var(--line);
+    pointer-events: none;
+  }
+
+  /* corner ticks (OperationX hairline language) */
+  .tick {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 0 solid var(--ink);
+  }
+  .tick.tl { top: 32px;    left: 32px;    border-top-width: 1.5px;    border-left-width: 1.5px; }
+  .tick.tr { top: 32px;    right: 32px;   border-top-width: 1.5px;    border-right-width: 1.5px; }
+  .tick.bl { bottom: 32px; left: 32px;    border-bottom-width: 1.5px; border-left-width: 1.5px; }
+  .tick.br { bottom: 32px; right: 32px;   border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+  /* top-left brand row */
+  .brand {
+    position: absolute;
+    top: 64px;
+    left: 80px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: "Crimson Pro", serif;
+    font-size: 24px;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+  .brand svg { display: block; }
+  .brand .nine { color: var(--accent); font-weight: 600; font-style: italic; }
+
+  /* top-right meta */
+  .meta-tr {
+    position: absolute;
+    top: 64px;
+    right: 80px;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .meta-tr .dot {
+    width: 4px; height: 4px; background: var(--ink-mute); border-radius: 50%;
+  }
+
+  /* main grid */
+  .grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    align-items: center;
+    padding: 0 80px;
+    gap: 60px;
+  }
+
+  .left {
+    padding-top: 16px;
+  }
+
+  .eyebrow {
+    font-family: "Spectral", serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ink-soft);
+    letter-spacing: 0.005em;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 36px; height: 1px;
+    background: var(--ink-soft);
+    display: inline-block;
+  }
+
+  .title-en {
+    font-family: "Crimson Pro", serif;
+    font-weight: 500;
+    font-size: 96px;
+    line-height: 1.0;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 0 0 28px;
+  }
+  .title-en .nine {
+    color: var(--accent);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .title-jp {
+    font-family: "Shippori Mincho B1", serif;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    letter-spacing: 0.01em;
+    margin: 0 0 38px;
+  }
+
+  .punch {
+    font-family: "Shippori Mincho B1", serif;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+    max-width: 560px;
+  }
+  .punch .accent-mark {
+    color: var(--accent);
+  }
+
+  /* right: 3x3 grid symbol */
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .symbol {
+    width: 280px;
+    height: 280px;
+  }
+  .symbol-cap {
+    font-family: "Spectral", serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+    text-align: center;
+    max-width: 240px;
+    line-height: 1.5;
+  }
+
+  /* bottom strip */
+  .bottom {
+    position: absolute;
+    left: 80px;
+    right: 80px;
+    bottom: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  .bottom .url {
+    font-family: "Crimson Pro", serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    letter-spacing: 0.005em;
+  }
+  .bottom .launch {
+    font-family: "Spectral", serif;
+    font-size: 14px;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="frame"></div>
+    <span class="tick tl"></span>
+    <span class="tick tr"></span>
+    <span class="tick bl"></span>
+    <span class="tick br"></span>
+
+    <div class="brand">
+      <svg width="22" height="22" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0"  y="0"  width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="11" y="0"  width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="22" y="0"  width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="0"  y="11" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="11" y="11" width="8" height="8" fill="#0F4392"></rect>
+        <rect x="22" y="11" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="0"  y="22" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="11" y="22" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+        <rect x="22" y="22" width="8" height="8" fill="none" stroke="#1a1a1a" stroke-width="1"></rect>
+      </svg>
+      <span>Rensa<span class="nine">9</span></span>
+    </div>
+
+    <div class="meta-tr">
+      <span>A METHODOLOGY</span>
+      <span class="dot"></span>
+      <span>NOT A SAAS</span>
+    </div>
+
+    <div class="grid">
+      <div class="left">
+        <div class="eyebrow">the aggregation fatigue</div>
+        <h1 class="title-en">Rensa<span class="nine">9</span></h1>
+        <p class="title-jp">レンサ・ナイン ── LLM時代の認知運用論</p>
+        <p class="punch">同じ前提を、<br />別のチャットで、別のページで、<br />私たちは何度書き直してきただろう。</p>
+      </div>
+
+      <div class="right">
+        <svg class="symbol" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0"   y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect>
+          <rect x="90"  y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect>
+          <rect x="180" y="0"   width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect>
+          <rect x="0"   y="90"  width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect>
+          <rect x="90"  y="90"  width="60" height="60" fill="#0F4392"></rect>
+          <rect x="180" y="90"  width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect>
+          <rect x="0"   y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect>
+          <rect x="90"  y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect>
+          <rect x="180" y="180" width="60" height="60" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect>
+        </svg>
+        <div class="symbol-cap">8 fragments converging<br />on a single, shared centre.</div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <span class="url">rensa9.ai</span>
+      <span class="launch">— LAUNCH 2026.06.29 —</span>
+      <span>OperationX</span>
+    </div>
+  </div>
+</body>
+</html>

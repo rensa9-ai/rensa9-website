@@ -1,0 +1,12 @@
+# 内部資料（公開しない）
+studies/
+BESTPRACTICES.md
+README.md
+
+# Vercelに送らないもの
+.git/
+.gitignore
+.vercelignore
+
+# フォントは現状未使用（Google Fonts参照）
+# 将来self-host化する場合は studies/fonts-archive/ から /fonts/ に移動
