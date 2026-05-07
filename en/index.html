@@ -193,6 +193,12 @@
     word-break: keep-all;
     line-break: strict;
     overflow-wrap: normal;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
   }
 
   ::selection { background: var(--paper-warm); color: var(--ink); }
@@ -766,6 +772,13 @@
   /* Mobile */
   @media (max-width: 520px) {
     :root { --gutter: 22px; }
+
+    /* On mobile, allow text to wrap naturally to avoid horizontal overflow */
+    html, body {
+      word-break: normal;
+      line-break: auto;
+      overflow-wrap: anywhere;
+    }
 
     .nav-inner { padding: 14px var(--gutter); }
     .nav-brand .word { font-size: 19px; }
