@@ -7,7 +7,7 @@
 
 <title>Rensa9 ── LLM時代の認知運用論 | 集約疲労を解く</title>
 <meta name="description" content="ChatGPT・Claude・Geminiをまたぐたびに、私たちは同じ前提を最初から書き直している。集約疲労 ── 知識労働の見えない摩擦に、認知運用論で挑むRensa9。OperationXの新規プロダクト。2026年6月29日ローンチ。" />
-<meta name="keywords" content="Rensa9, レンサ9, 集約疲労, Aggregation Fatigue, 認知運用, LLM, AI 文脈管理, AI 知識労働, ChatGPT Claude 統合, Cowan 4±1, OperationX" />
+<meta name="keywords" content="Rensa9, レンサ9, 集約疲労, Aggregation Fatigue, 認知運用, LLM, AI 文脈管理, AI 知識労働, ChatGPT Claude 統合, Transactive Memory, OperationX" />
 <meta name="author" content="OperationX" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
@@ -112,7 +112,7 @@
           "name": "集約疲労 (Aggregation Fatigue) とは何ですか?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ChatGPT・Claude・Geminiなど複数のAIツールや、Notion・Obsidian・Slackなどのナレッジツールをまたぐ際に、同じ前提や文脈を何度も書き直すことで生じる、知識労働の見えない摩擦のことです。Cowanの認知限界 (4±1) を外部に拡張する手段がない状態で、私たちは同じ議論を最初からやり直すという最も静かなコストを払い続けています。"
+            "text": "ChatGPT・Claude・Geminiなど複数のAIツールや、Notion・Obsidian・Slackなどのナレッジツールをまたぐ際に、同じ前提や文脈を何度も書き直すことで生じる、知識労働の見えない摩擦のことです。ツールが増えるほど『誰が・どこに・何を覚えているか』の見取り図（Wegner 1986 Transactive Memory が示した分散記憶の構造）は壊れていき、私たちは同じ議論を最初からやり直すという最も静かなコストを払い続けています。"
           }
         },
         {
@@ -576,7 +576,7 @@
   .stats {
     margin-top: clamp(80px, 10vw, 120px);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 0;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
@@ -928,7 +928,7 @@
 
       <p class="reveal">しかし、ツールをまたぐたび、文脈は失われる。<br />同じ前提を、別のチャットで、別のページで、<br />私たちは何度書き直してきただろう。</p>
 
-      <p class="reveal">Cowanの認知限界 (4±1) を、<br />外部に拡張する手段がないまま、<br />私たちは「同じ議論をやり直す」という、<br />最も静かなコストを払い続けている。</p>
+      <p class="reveal">ツールが増えるたび、<br />「誰が・どこに・何を覚えているか」の見取り図は壊れていく。<br />私たちは「同じ議論をやり直す」という、<br />最も静かなコストを払い続けている。</p>
 
       <hr class="fatigue-rule reveal" />
       <p class="fatigue-close reveal"><span class="rensa-inline">Rensa<span class="nine-inline">9</span></span> は、ここから始まる。</p>
@@ -936,11 +936,7 @@
 
     <div class="stats">
       <div class="stat reveal">
-        <div class="stat-num">4±1</div>
-        <div class="stat-label">人間の作業記憶の真の上限<span class="src">— Cowan, 2001</span></div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-num">N+1</div>
+        <div class="stat-num">N×N</div>
         <div class="stat-label">使用中のAI・ナレッジツール数<span class="src">— そしてセッション数</span></div>
       </div>
       <div class="stat reveal">
