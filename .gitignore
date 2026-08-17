@@ -21,3 +21,4 @@ npm-debug.log*
 
 # Node (将来的に使う可能性に備えて)
 node_modules/
+.claude/settings.local.json
